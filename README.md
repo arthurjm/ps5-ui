@@ -1,4 +1,8 @@
-# ps5-io
+# ps5-ui
+
+Try to reproduce the PS5 UI with Vue.
+
+I started this project to have fun and improve my skills.
 
 ## Project setup
 ```
@@ -14,11 +18,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
