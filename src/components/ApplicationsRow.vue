@@ -5,7 +5,7 @@
       :key="i"
       class="icon"
       :class="{ selected: selected === i }"
-      :style="`background-image: url(/applications/${app.image});`"
+      :style="`background-image: url(${this.getImageURL(app.image)});`"
     >
       <div v-if="selected === i" class="name">{{ app.name }}</div>
     </div>
@@ -38,6 +38,17 @@ export default {
         this.selected = Math.max(this.selected - 1, 0);
       }
     });
+  },
+
+  methods: {
+    getImageURL(image) {
+      try {
+        image = require("@/assets/applications/" + image);
+      } catch (e) {
+        image = ""; // I used a default image.
+      }
+      return image;
+    },
   },
 };
 </script>
