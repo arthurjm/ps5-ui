@@ -26,8 +26,10 @@ export default {
   height: 100vh;
 
   // compare to real ps5 ui
-  // background-image: url(https://images.frandroid.com/wp-content/uploads/2020/10/menu-ps5.jpg);
+  // background-image: url(https://images.frandroid.com/wp-content/uploads/2020/10/menu-ps5.jpg); // en
+  // background-image: url(https://www.generation-game.com/wp-content/uploads/2020/11/menu-interface-utilisateur-PS5-console.jpg); // fr
   // background-size: contain;
-  // background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 </style>

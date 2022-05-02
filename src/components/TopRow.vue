@@ -1,17 +1,24 @@
 <template>
   <div id="top-row">
     <div class="left">
-      <div class="selected">Games</div>
-      <div>Media</div>
+      <div class="selected">Jeux</div>
+      <div>Contenu multimédia</div>
     </div>
     <div class="right">
-      <div><font-awesome-icon icon="magnifying-glass" size="1x" /></div>
-      <div><font-awesome-icon icon="gear" size="1x" /></div>
-      <div id="profile">
+      <div class="search">
+        <font-awesome-icon icon="magnifying-glass" size="1x" />
+      </div>
+
+      <div class="parameters">
+        <font-awesome-icon icon="gear" size="1x" />
+      </div>
+
+      <div class="profile">
         <img src="@/assets/users/profile_picture.png" />
         <div class="status"></div>
       </div>
-      <div>{{ currentTime }}</div>
+
+      <div class="clock">{{ currentTime }}</div>
     </div>
   </div>
 </template>
@@ -43,25 +50,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin square($size) {
-  width: $size;
-  height: $size;
-}
+@import "@/styles/main.scss";
 
 #top-row {
+  position: absolute;
+  top: 3.5vh;
+  left: 4.7vw;
+
   display: flex;
   justify-content: space-between;
-  $marge: 5vw;
-  position: absolute;
-  top: 4%;
-  margin: 0 $marge;
-  width: 100vw - $marge * 2;
+
   font-family: "SST Light";
-  font-size: xxx-large;
+  font-size: 3.2vh;
+  letter-spacing: 0.045vw;
 }
 
-#top-row .left,
-#top-row .right {
+// Left
+#top-row .left {
   display: flex;
 }
 
@@ -69,30 +74,50 @@ export default {
   font-family: "SST Bold";
 }
 
-#top-row .left > *,
-#top-row .right > * {
-  margin-right: 4vw;
+#top-row .left :first-child {
+  margin-right: 4.1vw;
 }
 
-$profile-pic-size: 55px;
-
-#profile {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-#profile img {
-  @include square($profile-pic-size);
-  border-radius: 50%;
-}
-
-#profile .status {
-  @include square(15px);
-  background-color: rgb(17, 167, 17);
-  border-radius: 50%;
+// Right
+.search,
+.parameters,
+.profile,
+.clock {
   position: absolute;
-  top: $profile-pic-size * 0.8;
-  left: $profile-pic-size * 0.8;
+}
+
+.search {
+  left: 67.9vw;
+}
+
+.parameters {
+  left: 73.4vw;
+}
+
+.profile {
+  left: 78.4vw;
+  top: 0.1vh;
+  height: 2.5vw;
+  border-radius: 50%;
+}
+
+.profile img {
+  @include square(2.5vw);
+  height: inherit;
+  border-radius: 50%;
+}
+
+.profile .status {
+  position: absolute;
+  top: 73%;
+  left: 75%;
+  @include square(29%);
+  background-color: rgb(14, 226, 110);
+  border-radius: 50%;
+}
+
+.clock {
+  left: 86vw;
+  letter-spacing: 0.17vw;
 }
 </style>
