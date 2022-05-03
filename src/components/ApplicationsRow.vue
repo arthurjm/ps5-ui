@@ -30,14 +30,17 @@ export default {
 
   created() {
     this.applications = games;
+    if (this.applications.length > 1) {
+      this.selectedApplication = 1;
+    }
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowRight") {
+      if (event.code === "ArrowRight") {
         this.selectedApplication = Math.min(
           this.selectedApplication + 1,
           this.applications.length - 1
         );
-      } else if (event.key === "ArrowLeft") {
+      } else if (event.code === "ArrowLeft") {
         this.selectedApplication = Math.max(this.selectedApplication - 1, 0);
       }
     });

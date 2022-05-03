@@ -119,5 +119,6 @@ export default {
 .clock {
   left: 86vw;
   letter-spacing: 0.17vw;
+  z-index: 10;
 }
 </style>

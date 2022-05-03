@@ -18,8 +18,6 @@ export default {
 body {
   margin: 0;
   padding: 0;
-  color: white;
-  background-color: rgb(25, 25, 25);
   user-select: none;
 }
 
