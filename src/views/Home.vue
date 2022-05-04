@@ -8,7 +8,7 @@
 
 <script>
 import TopRow from "@/components/TopRow.vue";
-import ApplicationsRow from "@/components/ApplicationsRow.vue";
+import ApplicationsRow from "@/components/ApplicationsRow/ApplicationsRow.vue";
 import ControlCenter from "@/components/ControlCenter/ControlCenter.vue";
 
 export default {
@@ -53,8 +53,11 @@ export default {
 
   // control center
   // background-image: url(https://cdn.mos.cms.futurecdn.net/XZiYbJyZhSM7sqZHPPVeQe.jpg);
-  // background-size: contain;
-  background-size: 100% 100%;
+
+  //trophies
+  // background-image: url(https://pbs.twimg.com/media/EkYEZG0WsAIp26z.jpg:large);
+
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 </style>

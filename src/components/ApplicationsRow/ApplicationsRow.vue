@@ -4,22 +4,24 @@
       v-for="(app, i) in applications"
       :key="i"
       class="application"
-      :class="{ selected: selectedApplication === i }"
+      :class="{ selected: isSelected(i) }"
     >
-      <div
-        class="icon"
-        :style="`background-image: url(${this.getImageURL(app.image)});`"
-      ></div>
-      <div v-if="selectedApplication === i" class="name">{{ app.name }}</div>
+      <div class="icon" :style="`background-image: url(${app.icon})`"></div>
     </div>
   </div>
+  <ApplicationVue v-bind="getSelectedApplication" />
 </template>
 
 <script>
-import { games } from "@/data/games.js";
+import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
+import ApplicationVue from "./Application.vue";
 
 export default {
   name: "applications-row",
+
+  components: {
+    ApplicationVue,
+  },
 
   data: function () {
     return {
@@ -34,6 +36,12 @@ export default {
       this.selectedApplication = 1;
     }
 
+    this.applications.forEach((app, i) => {
+      app.icon = getIconURL(i);
+      app.background = getBackgroundURL(i);
+    });
+    console.log(this.applications);
+
     document.addEventListener("keydown", (event) => {
       if (event.code === "ArrowRight") {
         this.selectedApplication = Math.min(
@@ -47,13 +55,18 @@ export default {
   },
 
   methods: {
-    getImageURL(image) {
-      try {
-        image = require("@/assets/applications/" + image);
-      } catch (e) {
-        image = ""; // I used a default image.
-      }
-      return image;
+    isSelected(i) {
+      return i === this.selectedApplication;
+    },
+  },
+
+  computed: {
+    getSelectedApplication() {
+      const selectedApp = this.applications[this.selectedApplication];
+      const app = (({ name, background }) => ({ name, background }))(
+        selectedApp
+      );
+      return app;
     },
   },
 };
@@ -104,18 +117,8 @@ $sel-i-border-width: 2px;
 .icon {
   width: 100%;
   height: 100%;
-  background-size: contain;
+  background-size: 100%;
   background-repeat: no-repeat;
   border-radius: inherit;
-}
-
-.application .name {
-  position: absolute;
-  left: 9.7vw;
-  top: 10.8vh;
-  width: 500px;
-  font-family: "SST Light";
-  font-size: 3vh;
-  letter-spacing: -0.055vw;
 }
 </style>
