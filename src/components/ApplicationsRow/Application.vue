@@ -40,7 +40,7 @@ export default {
 .background {
   width: 100vw;
   height: 100vh;
-  background-size: 100%;
+  background-size: 100% 100%;
   // display: none;
 }
 

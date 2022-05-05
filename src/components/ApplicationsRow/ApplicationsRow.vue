@@ -14,6 +14,7 @@
 
 <script>
 import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
+
 import ApplicationVue from "./Application.vue";
 
 export default {
@@ -40,7 +41,6 @@ export default {
       app.icon = getIconURL(i);
       app.background = getBackgroundURL(i);
     });
-    console.log(this.applications);
 
     document.addEventListener("keydown", (event) => {
       if (event.code === "ArrowRight") {
@@ -117,7 +117,7 @@ $sel-i-border-width: 2px;
 .icon {
   width: 100%;
   height: 100%;
-  background-size: 100%;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   border-radius: inherit;
 }
