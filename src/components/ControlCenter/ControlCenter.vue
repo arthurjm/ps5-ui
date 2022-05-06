@@ -2,63 +2,56 @@
   <div id="control-center">
     <div class="controls">
       <ControlButton
-        v-for="(ctrl, i) in controls"
+        v-for="(ctrl, i) in controlsReact.list"
         :key="i"
         :control="ctrl"
-        :isSelected="selectedControl === i"
+        :isSelected="isSelected(i)"
       />
     </div>
   </div>
 </template>
 
-<script>
-import { controls } from "@/data/controlCenter.js";
+<script setup>
+import { reactive, onMounted, onUnmounted } from "vue";
 
 import ControlButton from "@/components/ControlCenter/ControlButton.vue";
 
-export default {
-  name: "control-center",
+import { controls } from "@/data/controlCenter.js";
 
-  components: {
-    ControlButton,
-  },
+const controlsReact = reactive({
+  list: controls,
+  selectedIndex: 0,
+});
 
-  data: function () {
-    return {
-      controls: [],
-      selectedControl: 0,
-    };
-  },
+onMounted(() => {
+  document.addEventListener("keydown", navigateControls, {
+    capture: true,
+  });
+});
 
-  created() {
-    this.controls = controls;
+onUnmounted(() => {
+  document.removeEventListener("keydown", navigateControls, true);
+});
 
-    document.addEventListener("keydown", this.navigateControls, {
-      capture: true,
-    });
-  },
+function navigateControls(event) {
+  console.log("event: ", event);
+  if (event.code === "ArrowRight") {
+    event.stopPropagation();
+    controlsReact.selectedIndex = Math.min(
+      controlsReact.selectedIndex + 1,
+      controlsReact.list.length - 1
+    );
+  }
 
-  beforeUnmount() {
-    document.removeEventListener("keydown", this.navigateControls, true);
-  },
+  if (event.code === "ArrowLeft") {
+    event.stopPropagation();
+    controlsReact.selectedIndex = Math.max(controlsReact.selectedIndex - 1, 0);
+  }
+}
 
-  methods: {
-    navigateControls(event) {
-      if (event.code === "ArrowRight") {
-        event.stopPropagation();
-        this.selectedControl = Math.min(
-          this.selectedControl + 1,
-          this.controls.length - 1
-        );
-      }
-
-      if (event.code === "ArrowLeft") {
-        event.stopPropagation();
-        this.selectedControl = Math.max(this.selectedControl - 1, 0);
-      }
-    },
-  },
-};
+function isSelected(i) {
+  return controlsReact.selectedIndex === i;
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,28 +1,17 @@
 <template>
   <div id="ps5-ui">
-    <Login v-if="!isConnected" @login="isConnected = true" />
+    <UserSelection v-if="!isConnected" @login="isConnected = true" />
     <Home v-else />
   </div>
 </template>
 
-<script>
-import Login from "@/components/Login/Login.vue";
-import Home from "@/views/Home.vue";
+<script setup>
+import { ref } from "vue";
 
-export default {
-  name: "App",
+import UserSelection from "@/components/UserSelection/UserSelection.vue";
+import Home from "@/views/HomeView.vue";
 
-  components: {
-    Login,
-    Home,
-  },
-
-  data: function () {
-    return {
-      isConnected: false,
-    };
-  },
-};
+const isConnected = ref(false);
 </script>
 
 <style lang="scss">

@@ -18,12 +18,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "application-component",
-
-  props: ["name", "background"],
-};
+<script setup>
+defineProps(["name", "background"]);
 </script>
 
 <style lang="scss" scoped>

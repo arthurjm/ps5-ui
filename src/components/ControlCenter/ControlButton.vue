@@ -5,12 +5,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "control-button",
-
-  props: ["control", "isSelected"],
-};
+<script setup>
+defineProps(["control", "isSelected"]);
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 <template>
   <div class="select-user">
     <div
-      v-for="(user, i) in users"
+      v-for="(user, i) in users.list"
       :key="user.name"
       class="user"
       :class="{ selected: isSelected(i) }"
@@ -17,58 +17,46 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { reactive, onMounted, onUnmounted } from "vue";
 import { getUsers, getAvatar } from "@/data/users.js";
 
-export default {
-  name: "login-component",
+const emit = defineEmits(["login"]);
 
-  emits: ["login"],
+const users = reactive({
+  list: getUsers(),
+  selectedIndex: 0,
+});
 
-  data() {
-    return {
-      users: [],
-      selectedUser: 0,
-    };
-  },
+onMounted(() => {
+  document.addEventListener("keydown", navigate);
+});
 
-  created() {
-    this.users = getUsers();
+onUnmounted(() => {
+  document.removeEventListener("keydown", navigate);
+});
 
-    document.addEventListener("keydown", this.action);
-  },
+function navigate(event) {
+  if (event.code === "ArrowRight") {
+    users.selectedIndex = Math.min(
+      users.selectedIndex + 1,
+      users.list.length - 1
+    );
+  } else if (event.code === "ArrowLeft") {
+    users.selectedIndex = Math.max(users.selectedIndex - 1, 0);
+  } else if (event.code === "Enter") {
+    const selectedUser = users.list[users.selectedIndex];
+    emit("login", selectedUser);
+    // userStore.$patch({
+    //   name: selectedUser.name,
+    //   avatar: selectedUser.avatar,
+    // });
+  }
+}
 
-  beforeUnmount() {
-    document.removeEventListener("keydown", this.action);
-  },
-
-  methods: {
-    action(event) {
-      if (event.code === "ArrowRight") {
-        this.selectedUser = Math.min(
-          this.selectedUser + 1,
-          this.users.length - 1
-        );
-      } else if (event.code === "ArrowLeft") {
-        this.selectedUser = Math.max(this.selectedUser - 1, 0);
-      } else if (event.code === "Enter") {
-        this.$emit("login", this.getSelectedUser());
-      }
-    },
-
-    getSelectedUser() {
-      return this.users[this.selectedUser];
-    },
-
-    getAvatar(i) {
-      return getAvatar(i);
-    },
-
-    isSelected(i) {
-      return i === this.selectedUser;
-    },
-  },
-};
+function isSelected(i) {
+  return users.selectedIndex === i;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -76,8 +64,6 @@ export default {
 
 .select-user {
   height: 100%;
-  /* width: 80%; */
-  /* background-color: green; */
   display: flex;
   margin: auto;
   justify-content: center;

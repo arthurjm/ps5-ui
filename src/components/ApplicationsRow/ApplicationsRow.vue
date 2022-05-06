@@ -1,7 +1,7 @@
 <template>
   <div id="applications-row">
     <div
-      v-for="(app, i) in applications"
+      v-for="(app, i) in applications.list"
       :key="i"
       class="application"
       :class="{ selected: isSelected(i) }"
@@ -9,67 +9,53 @@
       <div class="icon" :style="`background-image: url(${app.icon})`"></div>
     </div>
   </div>
-  <ApplicationVue v-bind="getSelectedApplication" />
+  <ApplicationInterface v-bind="selectedApplication" />
 </template>
 
-<script>
+<script setup>
+import { reactive, computed, onMounted } from "vue";
+
 import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
 
-import ApplicationVue from "./Application.vue";
+import ApplicationInterface from "./ApplicationInterface.vue";
 
-export default {
-  name: "applications-row",
+const applications = reactive({
+  list: games,
+  selectedIndex: 0,
+});
 
-  components: {
-    ApplicationVue,
-  },
+onMounted(() => {
+  applications.list = games;
+  if (applications.list.length > 1) {
+    applications.selectedIndex = 1;
+  }
 
-  data: function () {
-    return {
-      applications: [],
-      selectedApplication: 0,
-    };
-  },
+  applications.list.forEach((app, i) => {
+    app.icon = getIconURL(i);
+    app.background = getBackgroundURL(i);
+  });
 
-  created() {
-    this.applications = games;
-    if (this.applications.length > 1) {
-      this.selectedApplication = 1;
-    }
-
-    this.applications.forEach((app, i) => {
-      app.icon = getIconURL(i);
-      app.background = getBackgroundURL(i);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "ArrowRight") {
-        this.selectedApplication = Math.min(
-          this.selectedApplication + 1,
-          this.applications.length - 1
-        );
-      } else if (event.code === "ArrowLeft") {
-        this.selectedApplication = Math.max(this.selectedApplication - 1, 0);
-      }
-    });
-  },
-
-  methods: {
-    isSelected(i) {
-      return i === this.selectedApplication;
-    },
-  },
-
-  computed: {
-    getSelectedApplication() {
-      const selectedApp = this.applications[this.selectedApplication];
-      const app = (({ name, background }) => ({ name, background }))(
-        selectedApp
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "ArrowRight") {
+      applications.selectedIndex = Math.min(
+        applications.selectedIndex + 1,
+        applications.list.length - 1
       );
-      return app;
-    },
-  },
-};
+    } else if (event.code === "ArrowLeft") {
+      applications.selectedIndex = Math.max(applications.selectedIndex - 1, 0);
+    }
+  });
+});
+
+function isSelected(i) {
+  return i === applications.selectedIndex;
+}
+
+const selectedApplication = computed(() => {
+  const selectedApp = applications.list[applications.selectedIndex];
+  const app = (({ name, background }) => ({ name, background }))(selectedApp);
+  return app;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -92,7 +78,10 @@ $sel-i-border-width: 2px;
   $margin-left: 8.6vw;
   margin-left: calc(
     $margin-left -
-      ($i-width * v-bind(selectedApplication) - 2 * $sel-i-border-width)
+      (
+        $i-width * v-bind("applications.selectedIndex") - 2 *
+          $sel-i-border-width
+      )
   );
   width: 100vw - $margin-left * 2;
   height: 10vh;

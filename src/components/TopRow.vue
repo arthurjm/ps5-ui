@@ -23,30 +23,25 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "top-row",
+<script setup>
+import { ref, onMounted } from "vue";
 
-  data: function () {
-    return {
-      currentTime: null,
-    };
-  },
+import { useInterval } from "@/composables/interval.js";
 
-  created() {
-    this.getTime();
-    setInterval(this.getTime, 1000);
-  },
+const currentTime = ref("");
 
-  methods: {
-    getTime() {
-      var date = new Date();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      this.currentTime = `${hours}:${minutes}`;
-    },
-  },
-};
+onMounted(() => {
+  getTime();
+});
+
+useInterval(getTime, 1000);
+
+function getTime() {
+  var date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  currentTime.value = `${hours}:${minutes}`;
+}
 </script>
 
 <style lang="scss" scoped>
