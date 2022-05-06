@@ -1,5 +1,4 @@
 <template>
-  {{ isCCActive }}
   <TopRow />
   <ApplicationsRow />
   <ControlCenter v-if="isCCActive" />
@@ -27,10 +26,6 @@ function toggleControlCenter(event) {
     isCCActive.value = !isCCActive.value;
   }
 }
-
-// import { useUserStore } from "@/stores/user.js";
-// const userStore = useUserStore();
-// console.log(userStore.name);
 </script>
 
 <style lang="scss" scoped></style>
