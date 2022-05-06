@@ -1,7 +1,7 @@
 <template>
   <div class="select-user">
     <div
-      v-for="(user, i) in users.list"
+      v-for="(user, i) in users"
       :key="user.name"
       class="user"
       :class="{ selected: isSelected(i) }"
@@ -18,15 +18,15 @@
 </template>
 
 <script setup>
-import { reactive, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { getUsers, getAvatar } from "@/data/users.js";
+import { useArraySelect } from "@/composables/arraySelect.js";
+
+const { elements, selectedElement, previousElement, nextElement, isSelected } =
+  useArraySelect(getUsers());
+const users = ref(elements);
 
 const emit = defineEmits(["login"]);
-
-const users = reactive({
-  list: getUsers(),
-  selectedIndex: 0,
-});
 
 onMounted(() => {
   document.addEventListener("keydown", navigate);
@@ -38,24 +38,12 @@ onUnmounted(() => {
 
 function navigate(event) {
   if (event.code === "ArrowRight") {
-    users.selectedIndex = Math.min(
-      users.selectedIndex + 1,
-      users.list.length - 1
-    );
+    nextElement();
   } else if (event.code === "ArrowLeft") {
-    users.selectedIndex = Math.max(users.selectedIndex - 1, 0);
+    previousElement();
   } else if (event.code === "Enter") {
-    const selectedUser = users.list[users.selectedIndex];
-    emit("login", selectedUser);
-    // userStore.$patch({
-    //   name: selectedUser.name,
-    //   avatar: selectedUser.avatar,
-    // });
+    emit("login", selectedElement);
   }
-}
-
-function isSelected(i) {
-  return users.selectedIndex === i;
 }
 </script>
 

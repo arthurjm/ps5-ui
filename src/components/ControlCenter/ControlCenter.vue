@@ -2,7 +2,7 @@
   <div id="control-center">
     <div class="controls">
       <ControlButton
-        v-for="(ctrl, i) in controlsReact.list"
+        v-for="(ctrl, i) in elements"
         :key="i"
         :control="ctrl"
         :isSelected="isSelected(i)"
@@ -12,16 +12,15 @@
 </template>
 
 <script setup>
-import { reactive, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 import ControlButton from "@/components/ControlCenter/ControlButton.vue";
 
 import { controls } from "@/data/controlCenter.js";
 
-const controlsReact = reactive({
-  list: controls,
-  selectedIndex: 0,
-});
+import { useArraySelect } from "@/composables/arraySelect.js";
+const { elements, previousElement, nextElement, isSelected } =
+  useArraySelect(controls);
 
 onMounted(() => {
   document.addEventListener("keydown", navigateControls, {
@@ -34,23 +33,15 @@ onUnmounted(() => {
 });
 
 function navigateControls(event) {
-  console.log("event: ", event);
   if (event.code === "ArrowRight") {
     event.stopPropagation();
-    controlsReact.selectedIndex = Math.min(
-      controlsReact.selectedIndex + 1,
-      controlsReact.list.length - 1
-    );
+    nextElement();
   }
 
   if (event.code === "ArrowLeft") {
     event.stopPropagation();
-    controlsReact.selectedIndex = Math.max(controlsReact.selectedIndex - 1, 0);
+    previousElement();
   }
-}
-
-function isSelected(i) {
-  return controlsReact.selectedIndex === i;
 }
 </script>
 
