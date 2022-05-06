@@ -13,13 +13,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted } from "vue";
+
+import { useArraySelect } from "@/composables/arraySelect.js";
+import { useEventListener } from "@/composables/event.js";
 
 import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
 
 import ApplicationInterface from "./ApplicationInterface.vue";
 
-import { useArraySelect } from "@/composables/arraySelect.js";
+onMounted(() => {
+  selectedElement.value = 1;
+
+  applications.value.forEach((app, i) => {
+    app.icon = getIconURL(i);
+    app.background = getBackgroundURL(i);
+  });
+});
+
 const {
   elements,
   currentIndex,
@@ -30,13 +41,7 @@ const {
 } = useArraySelect(games);
 const applications = ref(elements);
 
-onMounted(() => {
-  document.addEventListener("keydown", navigate);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", navigate);
-});
+useEventListener(document, "keydown", navigate);
 
 function navigate(event) {
   if (event.code === "ArrowRight") {
@@ -45,15 +50,6 @@ function navigate(event) {
     previousElement();
   }
 }
-
-onMounted(() => {
-  selectedElement.value = 1;
-
-  applications.value.forEach((app, i) => {
-    app.icon = getIconURL(i);
-    app.background = getBackgroundURL(i);
-  });
-});
 </script>
 
 <style lang="scss" scoped>

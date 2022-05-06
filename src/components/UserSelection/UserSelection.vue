@@ -18,23 +18,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { getUsers, getAvatar } from "@/data/users.js";
+import { ref } from "vue";
+
 import { useArraySelect } from "@/composables/arraySelect.js";
+import { useEventListener } from "@/composables/event.js";
+
+import { getUsers, getAvatar } from "@/data/users.js";
+
+const emit = defineEmits(["login"]);
 
 const { elements, selectedElement, previousElement, nextElement, isSelected } =
   useArraySelect(getUsers());
 const users = ref(elements);
 
-const emit = defineEmits(["login"]);
-
-onMounted(() => {
-  document.addEventListener("keydown", navigate);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", navigate);
-});
+useEventListener(document, "keydown", navigate);
 
 function navigate(event) {
   if (event.code === "ArrowRight") {

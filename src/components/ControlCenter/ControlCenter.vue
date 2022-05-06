@@ -12,27 +12,21 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from "vue";
-
 import ControlButton from "@/components/ControlCenter/ControlButton.vue";
+
+import { useArraySelect } from "@/composables/arraySelect.js";
+import { useEventListener } from "@/composables/event.js";
 
 import { controls } from "@/data/controlCenter.js";
 
-import { useArraySelect } from "@/composables/arraySelect.js";
 const { elements, previousElement, nextElement, isSelected } =
   useArraySelect(controls);
 
-onMounted(() => {
-  document.addEventListener("keydown", navigateControls, {
-    capture: true,
-  });
+useEventListener(document, "keydown", navigate, {
+  capture: true,
 });
 
-onUnmounted(() => {
-  document.removeEventListener("keydown", navigateControls, true);
-});
-
-function navigateControls(event) {
+function navigate(event) {
   if (event.code === "ArrowRight") {
     event.stopPropagation();
     nextElement();
