@@ -42,8 +42,8 @@ body {
   height: 100vh;
 
   color: white;
-  background-color: rgb(25, 25, 25);
   background-color: rgb(255, 255, 255);
+  background-color: rgb(25, 25, 25);
   background-image: url(@/assets/background.jpg); // en
 
   // compare to real ps5 ui

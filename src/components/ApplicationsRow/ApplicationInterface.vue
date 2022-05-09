@@ -1,6 +1,5 @@
 <template>
   <div id="application" :style="`background-image: url(${background})`">
-    <div class="name">{{ name }}</div>
     <div class="left">
       <div class="banner"></div>
       <div class="description">Lorem ipsum</div>
@@ -22,16 +21,6 @@ defineProps(["name", "background"]);
   width: 100vw;
   height: 100vh;
   background-size: 100% 100%;
-}
-
-.name {
-  position: absolute;
-  left: 18.5vw;
-  top: 22vh;
-  width: 70vw;
-  font-family: "SST Light";
-  font-size: 3vh;
-  letter-spacing: -0.055vw;
 }
 
 .left {

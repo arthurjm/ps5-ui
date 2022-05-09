@@ -6,10 +6,14 @@
       class="application"
       :class="{ selected: isSelected(i) }"
     >
-      <div class="icon" :style="`background-image: url(${app.icon})`"></div>
+      <img class="icon" :src="app.icon" />
+      <div class="name" v-if="isSelected(i)">{{ app.name }}</div>
     </div>
   </div>
-  <ApplicationInterface v-bind="selectedElement" />
+  <ApplicationInterface
+    :name="selectedElement.name"
+    :background="selectedElement.background"
+  />
 </template>
 
 <script setup>
@@ -99,5 +103,15 @@ $sel-i-border-width: 2px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border-radius: inherit;
+}
+
+.name {
+  position: absolute;
+  left: 107%;
+  top: 68%;
+  width: 70vw;
+  font-family: "SST Light";
+  font-size: 3vh;
+  letter-spacing: -0.055vw;
 }
 </style>
