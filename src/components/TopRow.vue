@@ -14,7 +14,7 @@
       </div>
 
       <div class="profile">
-        <img src="@/assets/users/profile_picture.png" />
+        <img :src="avatar" />
         <div class="status"></div>
       </div>
 
@@ -25,16 +25,11 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-
 import { useInterval } from "@/composables/interval.js";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 const currentTime = ref("");
-
-onMounted(() => {
-  getTime();
-});
-
-useInterval(getTime, 1000);
 
 function getTime() {
   var date = new Date();
@@ -42,6 +37,15 @@ function getTime() {
   const minutes = date.getMinutes();
   currentTime.value = `${hours}:${minutes}`;
 }
+
+onMounted(() => {
+  getTime();
+});
+
+useInterval(getTime, 1000);
+
+const userStore = useUserStore();
+const { avatar } = storeToRefs(userStore);
 </script>
 
 <style lang="scss" scoped>

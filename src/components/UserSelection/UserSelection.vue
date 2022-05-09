@@ -25,6 +25,9 @@ import { useEventListener } from "@/composables/event.js";
 
 import { getUsers, getAvatar } from "@/data/users.js";
 
+import { useUserStore } from "@/stores/user";
+const { selectUser } = useUserStore();
+
 const emit = defineEmits(["login"]);
 
 const { elements, selectedElement, previousElement, nextElement, isSelected } =
@@ -39,6 +42,12 @@ function navigate(event) {
   } else if (event.code === "ArrowLeft") {
     previousElement();
   } else if (event.code === "Enter") {
+    const selectedUser = selectedElement.value;
+    const user = {
+      name: selectedUser.name,
+      avatar: getAvatar(selectedElement.value.id),
+    };
+    selectUser(user);
     emit("login", selectedElement);
   }
 }
