@@ -1,5 +1,7 @@
-import { createApp } from "vue";
 import App from "./App.vue";
+import { createApp } from "vue";
+
+import { createPinia } from "pinia";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -33,4 +35,7 @@ library.add(
   faPowerOff
 );
 
-createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");
+createApp(App)
+  .use(createPinia())
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
