@@ -1,9 +1,5 @@
 <template>
-  <div id="application">
-    <div
-      class="background"
-      :style="`background-image: url(${background})`"
-    ></div>
+  <div id="application" :style="`background-image: url(${background})`">
     <div class="name">{{ name }}</div>
     <div class="left">
       <div class="banner"></div>
@@ -14,7 +10,6 @@
       </div>
     </div>
     <div class="trophies"></div>
-    <div></div>
   </div>
 </template>
 
@@ -23,6 +18,12 @@ defineProps(["name", "background"]);
 </script>
 
 <style lang="scss" scoped>
+#application {
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+}
+
 .name {
   position: absolute;
   left: 18.5vw;
@@ -33,19 +34,14 @@ defineProps(["name", "background"]);
   letter-spacing: -0.055vw;
 }
 
-.background {
-  width: 100vw;
-  height: 100vh;
-  background-size: 100% 100%;
-  // display: none;
-}
-
 .left {
   position: absolute;
   top: 56vh;
   left: 9vw;
-  height: 27.8vh;
-  width: 22vw;
+  /* height: 27.8vh; */
+  height: 28vh;
+  width: 21.9vw;
+  /* width: 22vw; */
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -65,26 +61,25 @@ defineProps(["name", "background"]);
 .bottom {
   display: flex;
   margin-top: auto;
-  line-height: 6.4vh;
+  height: 24%;
+  justify-content: space-between;
 }
 
 .decoration {
-  border-radius: 2vw;
+  border-radius: 50px;
   background-color: rgba(112, 112, 112, 0.418);
   font-family: "SST Bold";
   font-size: 2.7vh;
-  vertical-align: text-bottom;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .play {
-  width: 100%;
+  width: 79%;
 }
 
 .options {
-  margin-left: 4%;
-  width: 4.8vw;
-  font-size: 2vh;
-  letter-spacing: 0.15vw;
+  width: 17%;
 }
 </style>
