@@ -19,8 +19,10 @@ import { useEventListener } from "@/composables/event.js";
 
 import { controls } from "@/data/controlCenter.js";
 
-const { elements, previousElement, nextElement, isSelected } =
-  useArraySelect(controls);
+const { elements, previousElement, nextElement, isSelected } = useArraySelect(
+  controls,
+  "ControlCenter"
+);
 
 useEventListener(document, "keydown", navigate, {
   capture: true,
