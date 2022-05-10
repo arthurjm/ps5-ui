@@ -1,8 +1,6 @@
 <template>
-  <div id="ps5-ui">
-    <UserSelection v-if="!isConnected" @login="isConnected = true" />
-    <Home v-else />
-  </div>
+  <UserSelection v-if="!isConnected" @login="isConnected = true" />
+  <Home v-else />
 </template>
 
 <script setup>
@@ -15,6 +13,8 @@ const isConnected = ref(false);
 </script>
 
 <style lang="scss">
+@import "@/styles/main.scss";
+
 @font-face {
   font-family: "SST Regular";
   src: url("@/assets/fonts/SSTRg.TTF");
@@ -34,16 +34,17 @@ body {
   margin: 0;
   padding: 0;
   user-select: none;
+  background-color: rgb(25, 25, 25);
 }
 
-#ps5-ui {
+#app {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  height: $height;
+  width: $width;
+  overflow: hidden;
+  margin: 0 auto;
 
   color: white;
-  background-color: rgb(255, 255, 255);
-  background-color: rgb(25, 25, 25);
   background-image: url(@/assets/background.jpg); // en
 
   // compare to real ps5 ui

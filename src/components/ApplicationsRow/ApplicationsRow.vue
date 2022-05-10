@@ -10,10 +10,7 @@
       <div class="name" v-if="isSelected(i)">{{ app.name }}</div>
     </div>
   </div>
-  <ApplicationInterface
-    :name="selectedElement.name"
-    :background="selectedElement.background"
-  />
+  <ApplicationInterface :background="selectedElement.background" />
 </template>
 
 <script setup>
@@ -60,41 +57,51 @@ function navigate(event) {
 @import "@/styles/main.scss";
 
 // Icon
-$i-size: 5.7vw;
-$i-margin-right: 0.34vw;
-$i-width: $i-size + $i-margin-right;
+$icon-size: 9.9 * $vh;
+$icon-margin-right: 0.65 * $vh;
+$icon-width: $icon-size + $icon-margin-right;
 
 // Selected icon
-$sel-i-size: 9vw;
-$sel-i-border-width: 2px;
+$sel-icon-size: 15.64 * $vh;
+$sel-border-width: 0.2 * $vw;
+$sel-margin: 0.7 * $vh;
+$sel-padding: -0.28 * $vw;
 
 #applications-row {
   display: flex;
   position: absolute;
-  top: 11.2vh;
+  top: 11.63 * $vh;
+  left: 8.55 * $vw;
 
-  $margin-left: 8.6vw;
-  margin-left: calc(
-    $margin-left - ($i-width * v-bind(currentIndex) - 2 * $sel-i-border-width)
-  );
-  width: 100vw - $margin-left * 2;
-  height: 10vh;
+  margin-left: calc(-1 * $icon-width * v-bind(currentIndex));
 }
 
 #applications-row > .application {
-  margin-right: $i-margin-right;
+  margin-right: $icon-margin-right;
 }
 
 .application {
   position: relative;
-  @include square($i-size);
+  @include square($icon-size);
   background-color: rgba(0, 0, 0, 0.578);
   border-radius: 15%;
 }
 
-.selected {
-  @include square($sel-i-size);
-  border: $sel-i-border-width solid white;
+.application.selected {
+  @include square($sel-icon-size);
+  margin-right: $icon-margin-right + $sel-margin !important;
+  margin-left: $sel-margin;
+}
+
+.application.selected:after {
+  content: "";
+  position: absolute;
+  top: $sel-padding;
+  left: $sel-padding;
+  right: $sel-padding;
+  bottom: $sel-padding;
+  border: white $sel-border-width solid;
+  border-radius: inherit;
 }
 
 .icon {
@@ -107,11 +114,11 @@ $sel-i-border-width: 2px;
 
 .name {
   position: absolute;
-  left: 107%;
-  top: 68%;
-  width: 70vw;
+  left: 109%;
+  top: 67%;
+  width: 70 * $vw;
   font-family: "SST Light";
-  font-size: 3vh;
-  letter-spacing: -0.055vw;
+  font-size: 3 * $vh;
+  letter-spacing: -0.055 * $vw;
 }
 </style>

@@ -46,8 +46,8 @@ function navigate(event) {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100 * $vw;
+  height: 100 * $vh;
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 16%,
@@ -58,12 +58,12 @@ function navigate(event) {
 
 #control-center .controls {
   position: absolute;
-  top: 92.2vh;
+  top: 92.2 * $vh;
   display: flex;
   justify-content: space-evenly;
-  $margin: 18.7vw;
+  $margin: 18.7 * $vw;
   margin: 0 $margin;
   width: calc(100vw - 2 * $margin);
-  font-size: 2.8vh;
+  font-size: 2.8 * $vh;
 }
 </style>

@@ -53,71 +53,66 @@ const { avatar } = storeToRefs(userStore);
 
 #top-row {
   position: absolute;
-  top: 3.5vh;
-  left: 4.7vw;
+
+  top: 3.2 * $vh;
+  $left: 4.7 * $vw;
+  left: $left;
+
+  height: 5 * $vh;
+  width: $width - 2 * $left;
 
   display: flex;
   justify-content: space-between;
 
   font-family: "SST Light";
-  font-size: 3.2vh;
-  letter-spacing: 0.045vw;
+  font-size: 3.2 * $vh;
+  letter-spacing: 0.045 * $vw;
 }
 
 // Left
-#top-row .left {
-  display: flex;
+#top-row .left :first-child {
+  margin-right: 9%;
 }
 
 #top-row .left .selected {
   font-family: "SST Bold";
 }
 
-#top-row .left :first-child {
-  margin-right: 4.1vw;
+.left {
+  display: flex;
+  align-items: center;
+  width: 50%;
 }
 
 // Right
-.search,
-.parameters,
-.profile,
-.clock {
-  position: absolute;
-}
-
-.search {
-  left: 67.9vw;
-}
-
-.parameters {
-  left: 73.4vw;
+.right {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  align-items: center;
 }
 
 .profile {
-  left: 78.4vw;
-  top: 0.1vh;
-  height: 2.5vw;
-  border-radius: 50%;
+  position: relative;
+  height: 100%;
 }
 
 .profile img {
-  @include square(2.5vw);
-  height: inherit;
+  height: 100%;
   border-radius: 50%;
 }
 
 .profile .status {
   position: absolute;
-  top: 73%;
-  left: 75%;
-  @include square(29%);
+  top: 76%;
+  left: 77%;
+  @include square($vw * 0.6);
   background-color: rgb(14, 226, 110);
   border-radius: 50%;
 }
 
 .clock {
-  left: 86vw;
-  letter-spacing: 0.17vw;
+  margin-left: 8%;
   z-index: 10;
 }
 </style>

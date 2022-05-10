@@ -16,7 +16,7 @@ defineProps(["control", "isSelected"]);
   display: flex;
   justify-content: center;
   align-items: center;
-  @include square(2.5vw);
+  @include square(2.5 * $vw);
 }
 
 .selected {
@@ -41,8 +41,8 @@ defineProps(["control", "isSelected"]);
 .name {
   color: white;
   font-family: "SST Light";
-  font-size: 2vh;
+  font-size: 2 * $vh;
   position: absolute;
-  top: -3.4vh;
+  top: -3.4 * $vh;
 }
 </style>

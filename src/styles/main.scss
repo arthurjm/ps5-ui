@@ -1,3 +1,11 @@
+$ratio: 16/9;
+
+$height: 100vh;
+$width: $height * $ratio;
+
+$vh: $height / 100;
+$vw: $width / 100;
+
 @mixin square($size) {
     width: $size;
     height: $size;

@@ -92,7 +92,7 @@ $user-size: 10vw;
 
 .name {
   position: absolute;
-  top: -3vh;
+  top: -3 * $vh;
   left: 0;
   width: 100%;
   text-align: center;

@@ -13,38 +13,37 @@
 </template>
 
 <script setup>
-defineProps(["name", "background"]);
+defineProps(["background"]);
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/main.scss";
+
 #application {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-size: 100% 100%;
 }
 
 .left {
   position: absolute;
-  top: 56vh;
-  left: 9vw;
-  /* height: 27.8vh; */
-  height: 28vh;
-  width: 21.9vw;
-  /* width: 22vw; */
+  top: 56 * $vh;
+  left: 9 * $vw;
+  height: 28 * $vh;
+  width: 21.9 * $vw;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
 .banner {
-  // background-color: green; // add game banner
   height: 44%;
 }
 
 .description {
   font-family: "SST Regular";
-  font-size: 2.7vh;
-  letter-spacing: 0.006vw;
+  font-size: 2.7 * $vh;
+  letter-spacing: 0.006 * $vw;
 }
 
 .bottom {
@@ -58,7 +57,7 @@ defineProps(["name", "background"]);
   border-radius: 50px;
   background-color: rgba(112, 112, 112, 0.418);
   font-family: "SST Bold";
-  font-size: 2.7vh;
+  font-size: 2.7 * $vh;
   display: flex;
   align-items: center;
   justify-content: center;
