@@ -28,8 +28,6 @@ import { getUsers, getAvatar } from "@/data/users.js";
 import { useUserStore } from "@/stores/user";
 const { selectUser } = useUserStore();
 
-const emit = defineEmits(["login"]);
-
 const { elements, selectedElement, previousElement, nextElement, isSelected } =
   useArraySelect(getUsers());
 const users = ref(elements);
@@ -48,7 +46,6 @@ function navigate(event) {
       avatar: getAvatar(selectedElement.value.id),
     };
     selectUser(user);
-    emit("login", selectedElement);
   }
 }
 </script>

@@ -1,15 +1,17 @@
 <template>
-  <UserSelection v-if="!isConnected" @login="isConnected = true" />
+  <UserSelection v-if="!isUserSelected" />
   <Home v-else />
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 import UserSelection from "@/components/UserSelection/UserSelection.vue";
 import Home from "@/views/HomeView.vue";
 
-const isConnected = ref(false);
+const userStore = useUserStore();
+const { isUserSelected } = storeToRefs(userStore);
 </script>
 
 <style lang="scss">
