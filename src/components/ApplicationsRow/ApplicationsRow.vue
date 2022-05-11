@@ -1,5 +1,5 @@
 <template>
-  <div id="applications-row">
+  <div id="applications-row" :class="indexClass">
     <div
       v-for="(app, i) in applications"
       :key="i"
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 import { useArraySelect } from "@/composables/arraySelect.js";
 import { useEventListener } from "@/composables/event.js";
@@ -51,6 +51,8 @@ function navigate(event) {
     previousElement();
   }
 }
+
+const indexClass = computed(() => `index-${currentIndex.value}`);
 </script>
 
 <style lang="scss" scoped>
@@ -72,8 +74,12 @@ $sel-padding: -0.28 * $vw;
   position: absolute;
   top: 11.63 * $vh;
   left: 8.55 * $vw;
+}
 
-  margin-left: calc(-1 * $icon-width * v-bind(currentIndex));
+@for $i from 1 through 10 {
+  .index-#{$i} {
+    margin-left: -$i * $icon-width;
+  }
 }
 
 #applications-row > .application {

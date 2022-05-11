@@ -1,5 +1,5 @@
 <template>
-  <div id="application" :style="`background-image: url(${background})`">
+  <div id="application">
     <div class="left">
       <div class="banner"></div>
       <div class="description">Lorem ipsum</div>
@@ -8,18 +8,24 @@
         <div class="options decoration">•••</div>
       </div>
     </div>
-    <div class="trophies"></div>
   </div>
+  <div id="background" :style="backgroundImage"></div>
 </template>
 
 <script setup>
-defineProps(["background"]);
+import { computed } from "vue";
+
+const props = defineProps(["background"]);
+
+const backgroundImage = computed(
+  () => `background-image: url(${props.background});`
+);
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-#application {
+#background {
   width: 100%;
   height: 100%;
   background-size: 100% 100%;
