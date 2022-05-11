@@ -76,10 +76,20 @@ $sel-margin: 0.7 * $vh;
 $sel-padding: -0.28 * $vw;
 
 #applications-row {
-  display: flex;
   position: absolute;
   top: 11.63 * $vh;
   left: 8.55 * $vw;
+  display: flex;
+  animation: slide-in 0.7s ease-in;
+}
+
+@keyframes slide-in {
+  from {
+    left: 150 * $vw;
+    opacity: 0;
+    transform: scale(0.1);
+    transform: scale(2, 0.4);
+  }
 }
 
 @for $i from 1 through 10 {
