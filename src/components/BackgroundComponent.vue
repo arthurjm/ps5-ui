@@ -21,12 +21,10 @@ const backgroundImage = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/main.scss";
+
 #background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  @include whole-space();
   background-size: 100% 100%;
 }
 

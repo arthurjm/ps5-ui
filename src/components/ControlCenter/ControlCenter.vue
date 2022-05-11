@@ -45,11 +45,7 @@ function navigate(event) {
 @import "@/styles/main.scss";
 
 #control-center {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100 * $vw;
-  height: 100 * $vh;
+  @include whole-space();
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 16%,

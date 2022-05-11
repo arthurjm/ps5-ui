@@ -6,6 +6,14 @@ $width: $height * $ratio;
 $vh: $height / 100;
 $vw: $width / 100;
 
+@mixin whole-space() {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 @mixin square($size) {
     width: $size;
     height: $size;

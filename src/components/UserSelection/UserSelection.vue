@@ -54,13 +54,7 @@ function navigate(event) {
 @import "@/styles/main.scss";
 
 .select-user {
-  position: absolute;
-  top: 0;
-
-  width: 100%;
-  height: 100%;
-  margin: auto;
-
+  @include whole-space();
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,11 +99,7 @@ $user-size: 10vw;
 }
 
 .avatar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: inherit;
+  @include whole-space();
   border-radius: inherit;
 }
 </style>
