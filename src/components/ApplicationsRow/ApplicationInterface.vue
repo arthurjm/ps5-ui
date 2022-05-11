@@ -9,27 +9,12 @@
       </div>
     </div>
   </div>
-  <div id="background" :style="backgroundImage"></div>
 </template>
 
-<script setup>
-import { computed } from "vue";
-
-const props = defineProps(["background"]);
-
-const backgroundImage = computed(
-  () => `background-image: url(${props.background});`
-);
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
-
-#background {
-  width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
-}
 
 .left {
   position: absolute;

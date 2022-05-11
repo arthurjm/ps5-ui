@@ -54,9 +54,14 @@ function navigate(event) {
 @import "@/styles/main.scss";
 
 .select-user {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
   height: 100%;
-  display: flex;
   margin: auto;
+
+  display: flex;
   justify-content: center;
   align-items: center;
 }

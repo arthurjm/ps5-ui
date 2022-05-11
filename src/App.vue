@@ -1,4 +1,5 @@
 <template>
+  <Background />
   <UserSelection v-if="!isUserSelected" />
   <Home v-else />
 </template>
@@ -7,6 +8,7 @@
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 
+import Background from "@/components/BackgroundComponent.vue";
 import UserSelection from "@/components/UserSelection/UserSelection.vue";
 import Home from "@/views/HomeView.vue";
 
@@ -47,7 +49,7 @@ body {
   margin: 0 auto;
 
   color: white;
-  background-image: url(@/assets/background.jpg); // en
+  // background-image: url(@/assets/background.jpg); // en
 
   // compare to real ps5 ui
   // background-image: url(https://images.frandroid.com/wp-content/uploads/2020/10/menu-ps5.jpg); // en

@@ -10,18 +10,19 @@
       <div class="name" v-if="isSelected(i)">{{ app.name }}</div>
     </div>
   </div>
-  <ApplicationInterface :background="selectedElement.background" />
+  <ApplicationInterface />
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import ApplicationInterface from "./ApplicationInterface.vue";
 
+import { ref, watch, onMounted, computed } from "vue";
 import { useArraySelect } from "@/composables/arraySelect.js";
 import { useEventListener } from "@/composables/event.js";
 
-import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
+import { useInterfaceStore } from "@/stores/interface";
 
-import ApplicationInterface from "./ApplicationInterface.vue";
+import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
 
 onMounted(() => {
   index.value = 1;
@@ -53,6 +54,11 @@ function navigate(event) {
 }
 
 const indexClass = computed(() => `index-${index.value}`);
+
+const interfaceStore = useInterfaceStore();
+watch(selectedElement, () => {
+  interfaceStore.background = selectedElement.value.background;
+});
 </script>
 
 <style lang="scss" scoped>
