@@ -43,7 +43,7 @@ function navigate(event) {
     const selectedUser = selectedElement.value;
     const user = {
       name: selectedUser.name,
-      avatar: getAvatar(selectedElement.value.id),
+      avatar: getAvatar(selectedUser.id),
     };
     selectUser(user);
   }

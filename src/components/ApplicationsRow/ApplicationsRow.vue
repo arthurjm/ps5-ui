@@ -24,7 +24,7 @@ import { games, getIconURL, getBackgroundURL } from "@/data/games.js";
 import ApplicationInterface from "./ApplicationInterface.vue";
 
 onMounted(() => {
-  selectedElement.value = 1;
+  index.value = 1;
 
   applications.value.forEach((app, i) => {
     app.icon = getIconURL(i);
@@ -34,7 +34,7 @@ onMounted(() => {
 
 const {
   elements,
-  currentIndex,
+  index,
   selectedElement,
   previousElement,
   nextElement,
@@ -52,7 +52,7 @@ function navigate(event) {
   }
 }
 
-const indexClass = computed(() => `index-${currentIndex.value}`);
+const indexClass = computed(() => `index-${index.value}`);
 </script>
 
 <style lang="scss" scoped>

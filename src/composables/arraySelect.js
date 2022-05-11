@@ -2,29 +2,34 @@ import { ref, computed } from "vue";
 import { useInterfaceStore } from "@/stores/interface";
 
 export function useArraySelect(array, componentName) {
-  const useInterface = useInterfaceStore();
+  const interfaceStore = useInterfaceStore();
 
   const elements = ref(array);
-  const currentIndex = ref(useInterface.indexes[componentName] || 0);
-  const selectedElement = computed({
-    get: () => elements.value[currentIndex.value],
+  const currentIndex = ref(interfaceStore.indexes[componentName] || 0);
+
+  const index = computed({
+    get: () => currentIndex.value,
     set: (val) => {
       if (val >= 0 && val <= elements.value.length - 1) {
         currentIndex.value = val;
 
         if (componentName) {
-          useInterface.indexes[componentName] = val;
+          interfaceStore.indexes[componentName] = val;
         }
       }
     },
   });
 
+  const selectedElement = computed({
+    get: () => elements.value[currentIndex.value],
+  });
+
   function previousElement() {
-    selectedElement.value = currentIndex.value - 1;
+    index.value--;
   }
 
   function nextElement() {
-    selectedElement.value = currentIndex.value + 1;
+    index.value++;
   }
 
   function isSelected(elementIndex) {
@@ -33,7 +38,7 @@ export function useArraySelect(array, componentName) {
 
   return {
     elements,
-    currentIndex,
+    index,
     selectedElement,
     previousElement,
     nextElement,
