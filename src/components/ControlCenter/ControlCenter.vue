@@ -65,7 +65,7 @@ function navigate(event) {
   justify-content: space-evenly;
   $margin: 18.7 * $vw;
   margin: 0 $margin;
-  width: calc(100vw - 2 * $margin);
+  width: calc(100 * $vw - 2 * $margin);
   font-size: 2.8 * $vh;
 }
 </style>
