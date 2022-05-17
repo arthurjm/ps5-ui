@@ -1,18 +1,27 @@
 const users = [
   {
     id: 0,
-    name: "Joueur 1",
-    avatar: "01.jpg",
+    name: "Ajouter un utilisateur",
   },
   {
     id: 1,
-    name: "Joueur 2",
-    avatar: "02.jpg",
+    name: "Nathan Drake",
+    avatar: "01.jpg",
   },
   {
     id: 2,
-    name: "Joueur 3",
+    name: "Aloy",
+    avatar: "02.jpg",
+  },
+  {
+    id: 3,
+    name: "Ratchet",
     avatar: "03.jpg",
+  },
+  {
+    id: 4,
+    name: "Clank",
+    avatar: "04.jpg",
   },
 ];
 
