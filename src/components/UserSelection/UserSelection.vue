@@ -1,22 +1,35 @@
 <template>
-  <div class="user-selection row">
-    <ul class="list" :class="indexClass">
-      <li
-        v-for="(user, i) in users"
-        :key="user.name"
-        class="user"
-        :class="{ selected: isSelected(i) }"
-      >
-        <div class="representation">
-          <div class="background"></div>
-          <img class="avatar" :src="getAvatar(i)" v-if="getAvatar(i)" />
+  <div class="user-selection">
+    <div class="messages">
+      <div class="welcome">{{ welcome }}</div>
+      <div class="controller-msg">{{ controller }}</div>
+      <div class="controller-icon">
+        <div class="controller-number">1</div>
+        <div>
+          <font-awesome-icon icon="gamepad" class="controller-icon" />
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <ul class="list" :class="indexClass">
+        <li
+          v-for="(user, i) in users"
+          :key="user.name"
+          class="user"
+          :class="{ selected: isSelected(i) }"
+        >
+          <div class="representation">
+            <div class="background"></div>
+            <img class="avatar" :src="getAvatar(i)" v-if="getAvatar(i)" />
+          </div>
 
-        <div class="name">
-          {{ user.name }}
-        </div>
-      </li>
-    </ul>
+          <div class="name">
+            {{ user.name }}
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="power"><font-awesome-icon icon="power-off" size="2x" /></div>
   </div>
 </template>
 
@@ -60,10 +73,61 @@ function navigate(event) {
 const indexClass = computed(() => `index-${index.value}`);
 
 index.value = 1;
+
+const welcome = "Content de vous revoir sur PlayStation";
+const controller = "Qui utilise cette manette ?";
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
+
+.user-selection {
+  @include whole-space();
+  display: flex;
+  flex-direction: column;
+  font-family: "SST Light";
+}
+
+.messages,
+.power {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messages {
+  margin-top: 12 * $vh;
+  height: 24 * $vh;
+}
+
+.welcome {
+  font-size: 4 * $vh;
+}
+
+.controller-msg {
+  font-size: 2 * $vh;
+  line-height: 6vh;
+}
+
+.power {
+  margin-top: auto;
+  margin-bottom: 3vh;
+}
+
+.controller-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+
+.controller-number {
+  font-size: 1 * $vh;
+}
+
+.controller-icon {
+  font-size: 2 * $vh;
+}
 
 $user-width: 12 * $vw;
 $user-height: 28 * $vh;
@@ -73,10 +137,8 @@ $sel-border-width: 0.1 * $vw;
 $sel-padding: -0.18 * $vw;
 
 .row {
-  position: absolute;
-  left: 50 * $vw - $sel-user-width/2;
-  top: 50 * $vh - $user-height/2;
   display: flex;
+  margin-left: 50 * $vw - $sel-user-width/2;
 }
 
 @for $i from 1 through 10 {
@@ -138,7 +200,6 @@ $sel-padding: -0.18 * $vw;
 }
 
 .name {
-  font-family: "SST Light";
   font-size: 2vh;
   letter-spacing: 0.006 * $vw;
 }
