@@ -18,31 +18,18 @@
         <div class="status"></div>
       </div>
 
-      <div class="clock">{{ currentTime }}</div>
+      <div class="clock">{{ time }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useInterval } from "@/composables/interval.js";
+import { useClock } from "@/composables/clock.js";
+
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 
-const currentTime = ref("");
-
-function getTime() {
-  var date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  currentTime.value = `${hours}:${minutes}`;
-}
-
-onMounted(() => {
-  getTime();
-});
-
-useInterval(getTime, 1000);
+const { time } = useClock();
 
 const userStore = useUserStore();
 const { avatar } = storeToRefs(userStore);
@@ -113,6 +100,5 @@ const { avatar } = storeToRefs(userStore);
 
 .clock {
   margin-left: 8%;
-  z-index: 10;
 }
 </style>
