@@ -4,24 +4,28 @@ const games = [
     name: "PlayStation Store",
     image: "ps-store.png",
     "app-type": null,
+    version: "",
   },
   {
     id: 1,
     name: "Bloodborne 2",
     image: "bloodborne-2.jpg",
     "app-type": "game",
+    version: "ps5",
   },
   {
     id: 2,
     name: "The Legend of Zelda: Breath of the Wild",
     image: "breath-of-the-wild.jpg",
     "app-type": "game",
+    version: "ps4",
   },
   {
     id: 3,
     name: "The Elder Scrolls VI : Skyrim II",
     image: "skyrim-2.jpg",
     "app-type": "game",
+    version: "ps5",
   },
 ];
 

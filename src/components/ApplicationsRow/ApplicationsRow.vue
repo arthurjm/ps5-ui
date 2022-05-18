@@ -7,7 +7,9 @@
       :class="{ selected: isSelected(i) }"
     >
       <img class="icon" :src="app.icon" />
-      <div class="name" v-if="isSelected(i)">{{ app.name }}</div>
+      <div v-if="isSelected(i)" class="name" :class="app.version">
+        {{ app.name }}
+      </div>
     </div>
   </div>
   <ApplicationInterface />
@@ -135,6 +137,8 @@ $sel-padding: -0.28 * $vw;
 }
 
 .name {
+  display: flex;
+  align-items: center;
   position: absolute;
   left: 109%;
   top: 67%;
@@ -142,5 +146,30 @@ $sel-padding: -0.28 * $vw;
   font-family: "SST Light";
   font-size: 3 * $vh;
   letter-spacing: -0.055 * $vw;
+}
+
+.ps5::before {
+  content: "PS5";
+  background-color: white;
+  color: black;
+  border: black;
+}
+
+.ps4::before {
+  content: "PS4";
+  background-color: black;
+  color: white;
+  border: white;
+}
+
+.ps5::before,
+.ps4::before {
+  margin-right: 0.5777777778 * $vh;
+  padding: 0.5 * $vh 1.5 * $vh;
+  border: 1px solid;
+  border-radius: 5px;
+  font-family: "SST Bold";
+  font-size: 1.5 * $vh;
+  letter-spacing: 0;
 }
 </style>
