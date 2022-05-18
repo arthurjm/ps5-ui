@@ -47,21 +47,6 @@ body {
   width: $width;
   overflow: hidden;
   margin: 0 auto;
-
   color: white;
-  // background-image: url(@/assets/background.jpg); // en
-
-  // compare to real ps5 ui
-  // background-image: url(https://images.frandroid.com/wp-content/uploads/2020/10/menu-ps5.jpg); // en
-  // background-image: url(https://www.generation-game.com/wp-content/uploads/2020/11/menu-interface-utilisateur-PS5-console.jpg); // fr
-
-  // control center
-  // background-image: url(https://cdn.mos.cms.futurecdn.net/XZiYbJyZhSM7sqZHPPVeQe.jpg);
-
-  //trophies
-  // background-image: url(https://pbs.twimg.com/media/EkYEZG0WsAIp26z.jpg:large);
-
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 </style>
