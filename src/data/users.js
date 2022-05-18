@@ -1,27 +1,27 @@
 const users = [
   {
     id: 0,
-    name: "Ajouter un utilisateur",
+    name: "Nathan Drake",
+    avatar: "01.jpg",
+    psplus: true,
   },
   {
     id: 1,
-    name: "Nathan Drake",
-    avatar: "01.jpg",
+    name: "Aloy",
+    avatar: "02.jpg",
+    psplus: true,
   },
   {
     id: 2,
-    name: "Aloy",
-    avatar: "02.jpg",
+    name: "Ratchet",
+    avatar: "03.jpg",
+    psplus: false,
   },
   {
     id: 3,
-    name: "Ratchet",
-    avatar: "03.jpg",
-  },
-  {
-    id: 4,
     name: "Clank",
     avatar: "04.jpg",
+    psplus: true,
   },
 ];
 

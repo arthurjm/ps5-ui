@@ -20,11 +20,17 @@
         >
           <div class="representation">
             <div class="background"></div>
-            <img class="avatar" :src="getAvatar(i)" v-if="getAvatar(i)" />
+            <img v-if="getAvatar(i)" class="avatar" :src="getAvatar(i)" />
           </div>
 
           <div class="name">
-            {{ user.name }}
+            <div>{{ user.name }}</div>
+            <img
+              v-if="user.psplus"
+              class="ps-plus"
+              src="@/assets/icons/ps-plus.png"
+              alt="PS Plus icon"
+            />
           </div>
         </li>
       </ul>
@@ -200,7 +206,15 @@ $sel-padding: -0.18 * $vw;
 }
 
 .name {
-  font-size: 2vh;
+  display: flex;
+  align-items: center;
+  $height: 2 * $vh;
+  font-size: $height;
   letter-spacing: 0.006 * $vw;
+
+  .ps-plus {
+    height: $height;
+    margin-left: 0.3 * $vw;
+  }
 }
 </style>
