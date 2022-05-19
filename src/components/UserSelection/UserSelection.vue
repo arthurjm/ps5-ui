@@ -1,15 +1,6 @@
 <template>
   <div class="user-selection">
-    <div class="messages">
-      <div class="welcome">{{ welcome }}</div>
-      <div class="controller-msg">{{ controller }}</div>
-      <div class="controller-icon">
-        <div class="controller-number">1</div>
-        <div>
-          <font-awesome-icon icon="gamepad" class="controller-icon" />
-        </div>
-      </div>
-    </div>
+    <WelcomeMessage />
     <div class="row">
       <ul class="list" :class="indexClass">
         <li
@@ -40,11 +31,11 @@
 </template>
 
 <script setup>
+import WelcomeMessage from "@/components/UserSelection/WelcomeMessage.vue";
 import { ref, computed } from "vue";
 
 import { useArraySelect } from "@/composables/arraySelect.js";
 import { useEventListener } from "@/composables/event.js";
-
 import { getUsers, getAvatar } from "@/data/users.js";
 
 import { useUserStore } from "@/stores/user";
@@ -79,9 +70,6 @@ function navigate(event) {
 const indexClass = computed(() => `index-${index.value}`);
 
 index.value = 1;
-
-const welcome = "Content de vous revoir sur PlayStation";
-const controller = "Qui utilise cette manette ?";
 </script>
 
 <style lang="scss" scoped>
@@ -92,47 +80,6 @@ const controller = "Qui utilise cette manette ?";
   display: flex;
   flex-direction: column;
   font-family: "SST Light";
-}
-
-.messages,
-.power {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.messages {
-  margin-top: 12 * $vh;
-  height: 24 * $vh;
-}
-
-.welcome {
-  font-size: 4 * $vh;
-}
-
-.controller-msg {
-  font-size: 2 * $vh;
-  line-height: 6vh;
-}
-
-.power {
-  margin-top: auto;
-  margin-bottom: 3vh;
-}
-
-.controller-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-}
-
-.controller-number {
-  font-size: 1 * $vh;
-}
-
-.controller-icon {
-  font-size: 2 * $vh;
 }
 
 $user-width: 12 * $vw;
@@ -168,20 +115,32 @@ $sel-padding: -0.18 * $vw;
   justify-content: center;
   width: $user-width;
   height: $user-height;
-}
 
-.user.selected {
-  width: $sel-user-width;
+  &.selected {
+    width: $sel-user-width;
+  }
 }
 
 .representation {
   position: relative;
-  @include square($user-width * 0.75);
+  $ratio: 0.75;
+  @include square($user-width * $ratio);
   margin: auto 0;
-}
 
-.selected .representation {
-  @include square($sel-user-width * 0.75);
+  .selected & {
+    @include square($sel-user-width * $ratio);
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: $sel-padding;
+      left: $sel-padding;
+      right: $sel-padding;
+      bottom: $sel-padding;
+      border: #919191 $sel-border-width solid;
+      border-radius: 50%;
+    }
+  }
 }
 
 .background,
@@ -192,17 +151,6 @@ $sel-padding: -0.18 * $vw;
 
 .background {
   background-color: rgba(0, 0, 0, 0.578);
-}
-
-.selected .representation:after {
-  content: "";
-  position: absolute;
-  top: $sel-padding;
-  left: $sel-padding;
-  right: $sel-padding;
-  bottom: $sel-padding;
-  border: #919191 $sel-border-width solid;
-  border-radius: 50%;
 }
 
 .name {
@@ -216,5 +164,9 @@ $sel-padding: -0.18 * $vw;
     height: $height;
     margin-left: 0.3 * $vw;
   }
+}
+
+.power {
+  margin: auto auto 2 * $vh auto;
 }
 </style>
