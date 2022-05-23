@@ -53,4 +53,9 @@ body {
   margin: 0 auto;
   color: white;
 }
+
+:root {
+  --green: rgb(32, 177, 97);
+  --orange: rgb(201, 145, 13);
+}
 </style>

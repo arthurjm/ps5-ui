@@ -25,3 +25,17 @@ $app-margin: max(100vw - #{$app-width}, 0vw);
     margin-top: $margin;
     margin-bottom: $margin;
 }
+
+@mixin status() {
+    &--online {
+        background-color: var(--green);
+    }
+
+    &--busy {
+        background-color: var(--orange);
+    }
+
+    &--offline {
+        outline: 2px dashed white;
+    }
+}

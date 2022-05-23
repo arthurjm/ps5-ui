@@ -99,17 +99,7 @@ const profileStatus = computed(() => "profile__status--" + status.value);
     @include square($vw * 0.6);
     border-radius: 50%;
 
-    &--online {
-      background-color: rgb(14, 226, 110);
-    }
-
-    &--busy {
-      background-color: orange;
-    }
-
-    &--offline {
-      outline: 2px dashed white;
-    }
+    @include status();
   }
 }
 </style>

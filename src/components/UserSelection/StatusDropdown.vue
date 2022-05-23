@@ -7,7 +7,10 @@
         class="dropdown__status"
         :class="{ 'dropdown__status--active': isSelected(i) }"
       >
-        <div class="dropdown__dot" :class="status.color"></div>
+        <div
+          class="dropdown__dot"
+          :class="'dropdown__dot--' + status.status"
+        ></div>
         <div class="dropdown__text">{{ status.text }}</div>
       </li>
     </ul>
@@ -29,17 +32,14 @@ const { elements, selectedElement, previousElement, nextElement, isSelected } =
     {
       status: "online",
       text: "Se connecter comme étant en ligne",
-      color: "dropdown__dot--green",
     },
     {
       status: "busy",
       text: "Occupé",
-      color: "dropdown__dot--orange",
     },
     {
       status: "offline",
       text: "Apparaître hors ligne",
-      color: "dropdown__dot--transparent",
     },
   ]);
 
@@ -91,17 +91,8 @@ function navigate(event) {
     border-radius: 50%;
     @include square($dot-size);
     margin: 0.7 * $vw 1.4 * $vw;
-  }
 
-  &__dot--green {
-    background-color: green;
-  }
-  &__dot--orange {
-    background-color: orange;
-  }
-  &__dot--transparent {
-    border: 2px dashed white;
-    box-sizing: border-box;
+    @include status();
   }
 
   &__text {
