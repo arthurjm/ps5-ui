@@ -27,6 +27,10 @@
         </li>
       </ul>
     </div>
+    <div class="options">
+      <div class="options__icon">O</div>
+      <div class="options__text">Options</div>
+    </div>
     <StatusDropdown
       v-if="isStatusDropdownActive"
       @toggle-dropdown="toggleStatusDropdown"
@@ -184,6 +188,32 @@ $sel-padding: -0.18 * $vw;
   .ps-plus {
     height: $height;
     margin-left: 0.3 * $vw;
+  }
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  margin-top: 1 * $vw;
+
+  &__icon {
+    color: black;
+    margin-right: 1 * $vw;
+
+    // temporaire
+    // https://codepen.io/dudleystorey/pen/AgEpXj
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    margin: 0 0.5 * $vw;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+    background-color: #f7f7f7;
+  }
+
+  &__text {
+    font-family: "SST Regular";
+    font-size: 1.7 * $vh;
   }
 }
 
