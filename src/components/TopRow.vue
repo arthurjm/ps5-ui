@@ -12,10 +12,9 @@
       <div class="parameters">
         <font-awesome-icon icon="gear" size="1x" />
       </div>
-
       <div class="profile">
-        <img :src="avatar" class="profile__img" />
-        <div class="profile__status"></div>
+        <img :src="avatar" class="profile__avatar" />
+        <div class="profile__status" :class="profileStatus"></div>
       </div>
 
       <Clock />
@@ -24,13 +23,16 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import Clock from "@/components/ClockComponent.vue";
 
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
-const { avatar } = storeToRefs(userStore);
+const { avatar, status } = storeToRefs(userStore);
+
+const profileStatus = computed(() => "profile__status--" + status.value);
 </script>
 
 <style lang="scss" scoped>
@@ -85,7 +87,7 @@ const { avatar } = storeToRefs(userStore);
   height: 100%;
   margin-left: 5.35vh;
 
-  &__img {
+  &__avatar {
     height: 100%;
     border-radius: 50%;
   }
@@ -95,8 +97,19 @@ const { avatar } = storeToRefs(userStore);
     top: 76%;
     left: 79%;
     @include square($vw * 0.6);
-    background-color: rgb(14, 226, 110);
     border-radius: 50%;
+
+    &--online {
+      background-color: rgb(14, 226, 110);
+    }
+
+    &--busy {
+      background-color: orange;
+    }
+
+    &--offline {
+      outline: 2px dashed white;
+    }
   }
 }
 </style>

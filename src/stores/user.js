@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
-  state: () => ({ name: "", avatar: "" }),
+  state: () => ({ name: "", avatar: "", status: "" }),
 
   getters: {
     isUserSelected: (state) => (state.name !== "" ? true : false),
@@ -11,6 +11,7 @@ export const useUserStore = defineStore("user", {
     selectUser(user) {
       this.name = user.name;
       this.avatar = user.avatar;
+      this.status = user.status;
     },
   },
 });

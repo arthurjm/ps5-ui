@@ -30,6 +30,7 @@
     <StatusDropdown
       v-if="isStatusDropdownActive"
       @toggle-dropdown="toggleStatusDropdown"
+      @connect="connect"
     />
     <div class="power"><font-awesome-icon icon="power-off" size="2x" /></div>
   </div>
@@ -67,12 +68,7 @@ function navigate(event) {
   } else if (event.code === "ArrowLeft") {
     previousElement();
   } else if (event.code === "Enter") {
-    const selectedUser = selectedElement.value;
-    const user = {
-      name: selectedUser.name,
-      avatar: getAvatar(selectedUser.id),
-    };
-    selectUser(user);
+    connect();
   } else if (event.code === "KeyO") {
     toggleStatusDropdown();
   }
@@ -83,6 +79,17 @@ const isStatusDropdownActive = ref(false);
 
 function toggleStatusDropdown() {
   isStatusDropdownActive.value = !isStatusDropdownActive.value;
+}
+
+function connect(status) {
+  console.log("status: ", status);
+  const selectedUser = selectedElement.value;
+  const user = {
+    name: selectedUser.name,
+    avatar: getAvatar(selectedUser.id),
+    status: status || "online",
+  };
+  selectUser(user);
 }
 </script>
 

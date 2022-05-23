@@ -18,26 +18,30 @@
 import { useEventListener } from "@/composables/event.js";
 import { useArraySelect } from "@/composables/arraySelect.js";
 
-const emit = defineEmits(["toggleDropdown"]);
+const emit = defineEmits(["toggleDropdown", "connect"]);
 
 useEventListener(document, "keydown", navigate, {
   capture: true,
 });
 
-const { elements, previousElement, nextElement, isSelected } = useArraySelect([
-  {
-    text: "Se connecter comme étant en ligne",
-    color: "dropdown__dot--green",
-  },
-  {
-    text: "Occupé",
-    color: "dropdown__dot--orange",
-  },
-  {
-    text: "Apparaître hors ligne",
-    color: "dropdown__dot--transparent",
-  },
-]);
+const { elements, selectedElement, previousElement, nextElement, isSelected } =
+  useArraySelect([
+    {
+      status: "online",
+      text: "Se connecter comme étant en ligne",
+      color: "dropdown__dot--green",
+    },
+    {
+      status: "busy",
+      text: "Occupé",
+      color: "dropdown__dot--orange",
+    },
+    {
+      status: "offline",
+      text: "Apparaître hors ligne",
+      color: "dropdown__dot--transparent",
+    },
+  ]);
 
 function navigate(event) {
   event.stopPropagation();
@@ -47,6 +51,8 @@ function navigate(event) {
     nextElement();
   } else if (event.code === "KeyO") {
     emit("toggleDropdown");
+  } else if (event.code === "Enter") {
+    emit("connect", selectedElement.value.status);
   }
 }
 </script>
