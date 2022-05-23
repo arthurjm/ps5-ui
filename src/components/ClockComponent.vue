@@ -19,7 +19,7 @@ const { getTime } = storeToRefs(interfaceStore);
   position: fixed;
   top: 3.5vh;
   $left: 9.4 * $vw;
-  left: calc(#{$margin} / 2 + #{$width - $left});
+  left: calc(#{$app-margin} / 2 + #{$app-width - $left});
 
   &__time {
     font-family: "SST Light";

@@ -1,12 +1,12 @@
 $ratio: 16/9;
 
-$height: 100vh;
-$width: $height * $ratio;
+$app-height: 100vh;
+$app-width: $app-height * $ratio;
 
-$vh: $height / 100;
-$vw: $width / 100;
+$vh: $app-height / 100;
+$vw: $app-width / 100;
 
-$margin: max(100vw - #{$width}, 0vw);
+$app-margin: max(100vw - #{$app-width}, 0vw);
 
 @mixin whole-space() {
     position: absolute;

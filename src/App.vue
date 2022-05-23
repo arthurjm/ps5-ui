@@ -47,8 +47,8 @@ body {
 
 #app {
   position: relative;
-  height: $height;
-  width: $width;
+  height: $app-height;
+  width: $app-width;
   overflow: hidden;
   margin: 0 auto;
   color: white;

@@ -71,8 +71,6 @@ function navigate(event) {
   }
 }
 const indexClass = computed(() => `index-${index.value}`);
-
-index.value = 1;
 </script>
 
 <style lang="scss" scoped>

@@ -44,7 +44,7 @@ const { avatar } = storeToRefs(userStore);
   left: $left;
 
   height: 5 * $vh;
-  width: $width - 2 * $left;
+  width: $app-width - 2 * $left;
 
   display: flex;
   justify-content: space-between;
