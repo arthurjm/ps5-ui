@@ -27,7 +27,10 @@
         </li>
       </ul>
     </div>
-    <StatusDropdown v-if="isStatusDropdownActive" />
+    <StatusDropdown
+      v-if="isStatusDropdownActive"
+      @toggle-dropdown="toggleStatusDropdown"
+    />
     <div class="power"><font-awesome-icon icon="power-off" size="2x" /></div>
   </div>
 </template>
@@ -71,15 +74,16 @@ function navigate(event) {
     };
     selectUser(user);
   } else if (event.code === "KeyO") {
-    console.log(event.code);
-    isStatusDropdownActive.value = !isStatusDropdownActive.value;
-  } else {
-    console.log(event.code);
+    toggleStatusDropdown();
   }
 }
 
 const indexClass = computed(() => `index-${index.value}`);
 const isStatusDropdownActive = ref(false);
+
+function toggleStatusDropdown() {
+  isStatusDropdownActive.value = !isStatusDropdownActive.value;
+}
 </script>
 
 <style lang="scss" scoped>

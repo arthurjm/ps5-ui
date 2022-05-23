@@ -1,23 +1,55 @@
 <template>
   <div class="dropdown">
     <ul class="dropdown__list">
-      <li class="dropdown__status dropdown__status--active">
-        <div class="dropdown__dot dropdown__dot--green"></div>
-        <div class="dropdown__text">Se connecter comme étant en ligne</div>
-      </li>
-      <li class="dropdown__status">
-        <div class="dropdown__dot dropdown__dot--orange"></div>
-        <div class="dropdown__text">Occupé</div>
-      </li>
-      <li class="dropdown__status">
-        <div class="dropdown__dot dropdown__dot--transparent"></div>
-        <div class="dropdown__text">Apparaître hors ligne</div>
+      <li
+        v-for="(status, i) in elements"
+        :key="status"
+        class="dropdown__status"
+        :class="{ 'dropdown__status--active': isSelected(i) }"
+      >
+        <div class="dropdown__dot" :class="status.color"></div>
+        <div class="dropdown__text">{{ status.text }}</div>
       </li>
     </ul>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useEventListener } from "@/composables/event.js";
+import { useArraySelect } from "@/composables/arraySelect.js";
+
+const emit = defineEmits(["toggleDropdown"]);
+
+useEventListener(document, "keydown", navigate, {
+  capture: true,
+});
+
+const { elements, previousElement, nextElement, isSelected } = useArraySelect([
+  {
+    text: "Se connecter comme étant en ligne",
+    color: "dropdown__dot--green",
+  },
+  {
+    text: "Occupé",
+    color: "dropdown__dot--orange",
+  },
+  {
+    text: "Apparaître hors ligne",
+    color: "dropdown__dot--transparent",
+  },
+]);
+
+function navigate(event) {
+  event.stopPropagation();
+  if (event.code === "ArrowUp") {
+    previousElement();
+  } else if (event.code === "ArrowDown") {
+    nextElement();
+  } else if (event.code === "KeyO") {
+    emit("toggleDropdown");
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
@@ -43,7 +75,7 @@
   }
 
   &__status--active {
-    border: 1px solid white;
+    outline: 1px solid white;
     border-radius: 5px;
   }
 
