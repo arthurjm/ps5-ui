@@ -6,6 +6,8 @@ $width: $height * $ratio;
 $vh: $height / 100;
 $vw: $width / 100;
 
+$margin: max(100vw - #{$width}, 0vw);
+
 @mixin whole-space() {
     position: absolute;
     top: 0;

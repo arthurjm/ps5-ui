@@ -1,5 +1,6 @@
 <template>
   <div id="control-center">
+    <Clock />
     <div class="controls">
       <ControlButton
         v-for="(ctrl, i) in elements"
@@ -12,6 +13,7 @@
 </template>
 
 <script setup>
+import Clock from "@/components/ClockComponent.vue";
 import ControlButton from "@/components/ControlCenter/ControlButton.vue";
 
 import { useArraySelect } from "@/composables/arraySelect.js";

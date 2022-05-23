@@ -12,8 +12,12 @@ import Background from "@/components/BackgroundComponent.vue";
 import UserSelection from "@/components/UserSelection/UserSelection.vue";
 import Home from "@/views/HomeView.vue";
 
+import { useClock } from "@/composables/clock.js";
+
 const userStore = useUserStore();
 const { isUserSelected } = storeToRefs(userStore);
+
+useClock();
 </script>
 
 <style lang="scss">

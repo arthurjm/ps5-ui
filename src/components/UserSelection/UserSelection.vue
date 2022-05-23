@@ -1,5 +1,6 @@
 <template>
   <div class="user-selection">
+    <Clock />
     <WelcomeMessage />
     <div class="row">
       <ul class="list" :class="indexClass">
@@ -31,7 +32,9 @@
 </template>
 
 <script setup>
+import Clock from "@/components/ClockComponent.vue";
 import WelcomeMessage from "@/components/UserSelection/WelcomeMessage.vue";
+
 import { ref, computed } from "vue";
 
 import { useArraySelect } from "@/composables/arraySelect.js";

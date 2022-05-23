@@ -1,11 +1,13 @@
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 export function useInterval(callback, time) {
-  let intervalId = 0;
+  const intervalId = ref(0);
 
   onMounted(() => {
-    intervalId = setInterval(callback, time);
+    intervalId.value = setInterval(callback, time);
   });
 
-  onUnmounted(() => clearInterval(intervalId));
+  onUnmounted(() => {
+    clearInterval(intervalId.value);
+  });
 }

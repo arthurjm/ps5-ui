@@ -14,22 +14,20 @@
       </div>
 
       <div class="profile">
-        <img :src="avatar" />
-        <div class="status"></div>
+        <img :src="avatar" class="profile__img" />
+        <div class="profile__status"></div>
       </div>
 
-      <div class="clock">{{ time }}</div>
+      <Clock />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useClock } from "@/composables/clock.js";
+import Clock from "@/components/ClockComponent.vue";
 
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
-
-const { time } = useClock();
 
 const userStore = useUserStore();
 const { avatar } = storeToRefs(userStore);
@@ -57,48 +55,48 @@ const { avatar } = storeToRefs(userStore);
 }
 
 // Left
-#top-row .left :first-child {
-  margin-right: 9%;
-}
-
-#top-row .left .selected {
-  font-family: "SST Bold";
-}
-
 .left {
   display: flex;
   align-items: center;
-  width: 50%;
+
+  & :first-child {
+    margin-right: 4 * $vw;
+  }
+
+  & .selected {
+    font-family: "SST Bold";
+  }
 }
 
 // Right
 .right {
   display: flex;
   justify-content: space-between;
-  width: 25%;
   align-items: center;
+  margin-right: 9.7 * $vw;
+}
+
+.parameters {
+  margin-left: 6.4vh;
 }
 
 .profile {
   position: relative;
   height: 100%;
-}
+  margin-left: 5.35vh;
 
-.profile img {
-  height: 100%;
-  border-radius: 50%;
-}
+  &__img {
+    height: 100%;
+    border-radius: 50%;
+  }
 
-.profile .status {
-  position: absolute;
-  top: 76%;
-  left: 77%;
-  @include square($vw * 0.6);
-  background-color: rgb(14, 226, 110);
-  border-radius: 50%;
-}
-
-.clock {
-  margin-left: 8%;
+  &__status {
+    position: absolute;
+    top: 76%;
+    left: 79%;
+    @include square($vw * 0.6);
+    background-color: rgb(14, 226, 110);
+    border-radius: 50%;
+  }
 }
 </style>
