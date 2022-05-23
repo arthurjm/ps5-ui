@@ -27,6 +27,7 @@
         </li>
       </ul>
     </div>
+    <StatusDropdown v-if="isStatusDropdownActive" />
     <div class="power"><font-awesome-icon icon="power-off" size="2x" /></div>
   </div>
 </template>
@@ -34,6 +35,7 @@
 <script setup>
 import Clock from "@/components/ClockComponent.vue";
 import WelcomeMessage from "@/components/UserSelection/WelcomeMessage.vue";
+import StatusDropdown from "@/components/UserSelection/StatusDropdown.vue";
 
 import { ref, computed } from "vue";
 
@@ -68,9 +70,16 @@ function navigate(event) {
       avatar: getAvatar(selectedUser.id),
     };
     selectUser(user);
+  } else if (event.code === "KeyO") {
+    console.log(event.code);
+    isStatusDropdownActive.value = !isStatusDropdownActive.value;
+  } else {
+    console.log(event.code);
   }
 }
+
 const indexClass = computed(() => `index-${index.value}`);
+const isStatusDropdownActive = ref(false);
 </script>
 
 <style lang="scss" scoped>
